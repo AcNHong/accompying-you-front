@@ -4,7 +4,7 @@
   >
     <van-card
         v-for="team in props.teamList"
-        :thumb="ikun"
+        :thumb="cuteCat"
         :desc="team.description"
         :title="`${team.name}`"
     >
@@ -54,6 +54,7 @@
 import {TeamType} from "../models/team";
 import {teamStatusEnum} from "../constants/team";
 import ikun from '../assets/ikun.png';
+import cuteCat from '../assets/cuteCat.png';
 import myAxios from "../plugins/myAxios";
 import {Dialog, Toast} from "vant";
 import {onMounted, ref} from "vue";
@@ -134,7 +135,7 @@ const doQuitTeam = async (id: number) => {
   const res = await myAxios.post('/team/quit', {
     teamId: id
   });
-  if (res?.code === 0) {
+  if (res?.code === 200) {
     Toast.success('操作成功');
   } else {
     Toast.fail('操作失败' + (res.description ? `，${res.description}` : ''));
@@ -146,13 +147,15 @@ const doQuitTeam = async (id: number) => {
  * @param id
  */
 const doDeleteTeam = async (id: number) => {
-  const res = await myAxios.post('/team/delete', {
-    id,
+  console.log(id)
+  const res = await myAxios.post('/team/delete?teamId=', {
+    teamId: id
   });
-  if (res?.code === 0) {
+
+  if (res?.code === 200) {
     Toast.success('操作成功');
   } else {
-    Toast.fail('操作失败' + (res.description ? `，${res.description}` : ''));
+    Toast.fail('操作失败' + (res.description ? `,${res.description}` : ''));
   }
 }
 

@@ -25,13 +25,13 @@ const teamList = ref([]);
  * @returns {Promise<void>}
  */
 const listTeam = async (val = '') => {
-  const res = await myAxios.get("/team/list/my/join", {
+  const res = await myAxios.get("/team/list/myJoin", {
     params: {
       searchText: val,
       pageNum: 1,
     },
   });
-  if (res?.code === 0) {
+  if (res?.code === 200) {
     teamList.value = res.data;
   } else {
     Toast.fail('加载队伍失败，请刷新重试');

@@ -1,9 +1,17 @@
 import axios, {AxiosInstance} from "axios";
 
+axios.defaults.withCredentials = true// Cookie跨域
 const isDev = process.env.NODE_ENV === 'development';
 
 const myAxios: AxiosInstance = axios.create({
-    baseURL: isDev ? 'http://localhost:8080/api' : '线上地址',
+    // baseURL: isDev ? 'http://localhost:8080/api' : 'https://accompyingyou-107509-6-1326613689.sh.run.tcloudbase.com:8080/api',
+    // baseURL: 'https://accompyingyou-107509-6-1326613689.sh.run.tcloudbase.com/api',
+    baseURL: 'http://localhost:8080/api',
+    headers: {
+        'Content-Type': 'application/json',
+        'server': 'localhost',
+        'conten-encoding': 'gzip'
+      }
 });
 
 myAxios.defaults.withCredentials = true; // 配置为true
@@ -27,6 +35,7 @@ myAxios.interceptors.response.use(function (response) {
         window.location.href = `/user/login?redirect=${redirectUrl}`;
     }
     // Do something with response data
+    console.log(response.data);
     return response.data;
 }, function (error) {
     // Do something with response error

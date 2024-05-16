@@ -43,7 +43,7 @@ const onSubmit = async () => {
     userPassword: userPassword.value,
   })
   console.log(res, '用户登录');
-  if (res.code === 0 && res.data) {
+  if (res.code === 200 && res.data) {
     Toast.success('登录成功');
     // 跳转到之前的页面
     const redirectUrl = route.query?.redirect as string ?? '/';

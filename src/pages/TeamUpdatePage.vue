@@ -93,7 +93,8 @@ onMounted(async () => {
       id,
     }
   });
-  if (res?.code === 0) {
+  if (res?.code === 200) {
+    console.log("team get参数",res.data)
     addTeamData.value = res.data;
   } else {
     Toast.fail('加载队伍失败，请刷新重试');
@@ -107,8 +108,10 @@ const onSubmit = async () => {
     status: Number(addTeamData.value.status)
   }
   // todo 前端参数校验
-  const res = await myAxios.post("/team/update", postData);
-  if (res?.code === 0 && res.data){
+  console.log("修改team参数",postData);
+  const res = await myAxios.post('/team/update',postData);
+  console.log("返回结果",res?.code,"----",res.data)
+  if (res?.code === 200 && res.data){
     Toast.success('更新成功');
     router.push({
       path: '/team',

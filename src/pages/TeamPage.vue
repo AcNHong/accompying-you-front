@@ -61,10 +61,10 @@ const listTeam = async (val = '', status = 0) => {
       status,
     },
   });
-  if (res?.code === 0) {
+  if (res?.code === 200) {
     teamList.value = res.data;
   } else {
-    Toast.fail('加载队伍失败，请刷新重试');
+    Toast.fail('队伍为空');
   }
 }
 

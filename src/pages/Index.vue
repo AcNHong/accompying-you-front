@@ -20,6 +20,7 @@ const isMatchMode = ref<boolean>(false);
 const userList = ref([]);
 const loading = ref(true);
 
+
 /**
  * 加载数据
  */
@@ -46,19 +47,20 @@ const loadData = async () => {
     // 普通模式，直接分页查询用户
     userListData = await myAxios.get('/user/recommend', {
       params: {
-        pageSize: 8,
-        pageNum: 1,
+        currentPage: 1,
+        size: 8,
       },
     })
         .then(function (response) {
           console.log('/user/recommend succeed', response);
-          return response?.data?.records;
+          return response?.data || {};
         })
         .catch(function (error) {
           console.error('/user/recommend error', error);
           Toast.fail('请求失败');
         })
   }
+  console.log(userListData)
   if (userListData) {
     userListData.forEach((user: UserType) => {
       if (user.tags) {
