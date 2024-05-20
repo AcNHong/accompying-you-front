@@ -54,7 +54,7 @@
 import {TeamType} from "../models/team";
 import {teamStatusEnum} from "../constants/team";
 import ikun from '../assets/ikun.png';
-import cuteCat from '../assets/cuteCat.png';
+import cuteCat from '../asset/cuteCat.png';
 import myAxios from "../plugins/myAxios";
 import {Dialog, Toast} from "vant";
 import {onMounted, ref} from "vue";
@@ -106,7 +106,7 @@ const doJoinTeam = async () => {
     teamId: joinTeamId.value,
     password: password.value
   });
-  if (res?.code === 0) {
+  if (res?.code === 200) {
     Toast.success('加入成功');
     doJoinCancel();
   } else {
